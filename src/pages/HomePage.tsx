@@ -1,137 +1,52 @@
 import React from 'react';
 import Header from '@/components/layout/Header';
 import LeftSidebar from '@/components/layout/LeftSidebar';
-import MusicPlayerFooter from '@/components/layout/MusicPlayerFooter';
-import ContentCard from '@/components/ContentCard';
-import { ScrollArea } from '@/components/ui/scroll-area';
-
-// Placeholder data for content cards
-const featuredPlaylists = [
-  {
-    id: 'pl1',
-    title: 'Dorae-Chill',
-    subtitle: 'Lo-fi beats for studying and relaxing.',
-    imageUrl: 'https://picsum.photos/seed/doraechill/300/300',
-    href: '/playlist',
-  },
-  {
-    id: 'pl2',
-    title: 'Anywhere Door Pop',
-    subtitle: 'Global pop hits to take you anywhere.',
-    imageUrl: 'https://picsum.photos/seed/doraepop/300/300',
-    href: '/playlist',
-  },
-  {
-    id: 'pl3',
-    title: 'Time-Machine Rock',
-    subtitle: 'Classic rock anthems from the past.',
-    imageUrl: 'https://picsum.photos/seed/doraerock/300/300',
-    href: '/playlist',
-  },
-  {
-    id: 'pl4',
-    title: 'Gadget Grooves',
-    subtitle: 'Upbeat electronic music to get you moving.',
-    imageUrl: 'https://picsum.photos/seed/doraegroove/300/300',
-    href: '/playlist',
-  },
-    {
-    id: 'pl5',
-    title: 'Pocket Full of Jazz',
-    subtitle: 'Smooth jazz for a sophisticated evening.',
-    imageUrl: 'https://picsum.photos/seed/doraejazz/300/300',
-    href: '/playlist',
-  },
-];
-
-const newReleases = [
-  {
-    id: 'ar1',
-    title: 'Cosmic Echoes',
-    subtitle: 'By The Space Cadets',
-    imageUrl: 'https://picsum.photos/seed/doraeartist1/300/300',
-    href: '/artist',
-  },
-  {
-    id: 'ar2',
-    title: 'Blue Horizon',
-    subtitle: 'By Seaside Dreamers',
-    imageUrl: 'https://picsum.photos/seed/doraeartist2/300/300',
-    href: '/artist',
-  },
-  {
-    id: 'ar3',
-    title: 'Future Funk',
-    subtitle: 'By Robot Orchestra',
-    imageUrl: 'https://picsum.photos/seed/doraeartist3/300/300',
-    href: '/artist',
-  },
-   {
-    id: 'ar4',
-    title: 'City Lights',
-    subtitle: 'By Midnight Cruisers',
-    imageUrl: 'https://picsum.photos/seed/doraeartist4/300/300',
-    href: '/artist',
-  },
-  {
-    id: 'ar5',
-    title: 'Another Dimension',
-    subtitle: 'By Quantum Leap',
-    imageUrl: 'https://picsum.photos/seed/doraeartist5/300/300',
-    href: '/artist',
-  },
-];
+import StatCard from '@/components/StatCard';
+import { DollarSign, Users, Activity } from 'lucide-react';
 
 const HomePage = () => {
-  console.log('HomePage loaded');
-
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-black text-white">
-      <div className="flex h-full">
-        <LeftSidebar />
-        <main className="flex-1 flex flex-col overflow-hidden">
-          <Header />
-          {/* Add pb-24 for the music player height + some padding */}
-          <ScrollArea className="flex-1 px-6 pt-6 pb-28">
-            <div className="space-y-8">
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4">
-                  Featured Playlists
-                </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                  {featuredPlaylists.map((playlist) => (
-                    <ContentCard
-                      key={playlist.id}
-                      title={playlist.title}
-                      subtitle={playlist.subtitle}
-                      imageUrl={playlist.imageUrl}
-                      href={playlist.href}
-                    />
-                  ))}
-                </div>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4">
-                  New Releases
-                </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                  {newReleases.map((release) => (
-                    <ContentCard
-                      key={release.id}
-                      title={release.title}
-                      subtitle={release.subtitle}
-                      imageUrl={release.imageUrl}
-                      href={release.href}
-                    />
-                  ))}
-                </div>
-              </section>
+    <div className="flex min-h-screen w-full flex-col bg-muted/40 sm:flex-row">
+      <LeftSidebar />
+      <div className="flex flex-1 flex-col sm:pl-14">
+        <Header />
+        <main className="flex-1 gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+          <div className="space-y-4">
+            <h1 className="text-3xl font-bold tracking-tight">
+              Dashboard Overview
+            </h1>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <StatCard
+                title="Monthly Recurring Revenue"
+                value={48320}
+                icon={<DollarSign className="h-5 w-5" />}
+                change="3.2%"
+                changeType="increase"
+                period="vs last month"
+                prefix="£"
+              />
+              <StatCard
+                title="Active Users"
+                value={1245}
+                icon={<Users className="h-5 w-5" />}
+                change="122"
+                changeType="increase"
+                period="this week"
+              />
+              <StatCard
+                title="Churn Rate"
+                value={1.8}
+                icon={<Activity className="h-5 w-5" />}
+                change="0.2%"
+                changeType="decrease"
+                period="vs last month"
+                suffix="%"
+                decimals={1}
+              />
             </div>
-          </ScrollArea>
+          </div>
         </main>
       </div>
-      <MusicPlayerFooter />
     </div>
   );
 };
